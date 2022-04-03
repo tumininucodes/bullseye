@@ -12,6 +12,7 @@ struct ContentView: View {
     @State var alertIsVisible: Bool = false
     
     var body: some View {
+        
         VStack {
             Text("Hello, world!")
                 .fontWeight(.heavy)
@@ -25,5 +26,6 @@ struct ContentView: View {
                 Alert(title: Text("Hello there!"), message: Text("This is my first pop-up."), dismissButton: .default(Text("Awesome")))
             }
         }
+        
     }
 }
