@@ -12,6 +12,9 @@ struct ContentView: View {
     @State var alertIsVisible: Bool = false
     @State var sliderValue: Double = 50.0
     @State var target: Int = Int.random(in: 1...100)
+    var sliderValueRounded: Int {
+        Int(sliderValue.rounded())
+    }
     
     var body: some View {
         
@@ -42,9 +45,7 @@ struct ContentView: View {
             }.alert(isPresented: self.$alertIsVisible) {
                 Alert(
                     title: Text("Hello there!"),
-                    message: Text("The slider's value is \(Int(self.sliderValue.rounded())).\n" +
-                                  "The target value is \(self.target).\n" +
-                                  "You scored \(self.pointsForCurrentRound()) points this round."),
+                    message: Text(self.scoringMessage()),
                     dismissButton: .default(Text("Awesome")))
             }
             
@@ -77,15 +78,20 @@ struct ContentView: View {
     }
     
     func pointsForCurrentRound() -> Int {
-      var difference: Int
-      if Int(self.sliderValue.rounded()) > self.target {
-        difference = Int(self.sliderValue.rounded()) - self.target
-      } else if self.target > Int(self.sliderValue.rounded()) {
-        difference = self.target - Int(self.sliderValue.rounded())
-      } else {
-        difference = 0
-      }
-      return 100 - difference
+        let difference: Int
+        if sliderValueRounded > self.target {
+            difference = sliderValueRounded - self.target
+        } else if self.target > sliderValueRounded {
+            difference = self.target - sliderValueRounded
+        } else {
+            difference = 0
+        }
+        return 100 - difference
     }
     
+    func scoringMessage() -> String {
+        return "The slider's value is \(self.sliderValueRounded).\n" +
+        "The target value is \(self.target).\n" +
+        "You scored \(self.pointsForCurrentRound()) points this round."
+    }
 }
