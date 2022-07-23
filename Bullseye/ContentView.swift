@@ -26,7 +26,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Spacer()
+                Spacer().navigationBarTitle(" Bullseye ")
                 HStack {
                     Text("Put the text as close as you can to:")
                         .modifier(LabelStyle())
