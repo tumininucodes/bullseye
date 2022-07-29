@@ -39,6 +39,7 @@ struct ContentView: View {
                         .modifier(LabelStyle())
                     Slider(value: $sliderValue, in: 1...100)
                         .accentColor(Color.green)
+                        .animation(.easeOut)
                     Text("100")
                         .modifier(LabelStyle())
                 }
@@ -158,7 +159,6 @@ struct ContentView: View {
 }
 
 // View modifiers
-// ==============
 struct LabelStyle: ViewModifier {
   func body(content: Content) -> some View {
     content
